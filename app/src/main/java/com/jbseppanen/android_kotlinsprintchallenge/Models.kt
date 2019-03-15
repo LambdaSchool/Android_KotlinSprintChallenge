@@ -13,7 +13,13 @@ data class VideoData(
     val short_description: String,
     val video_files: List<VideoFile>,
     val youtube_id: String
-)
+) {
+    fun getLastVideoUrl():String {
+      return video_files.last().file_url
+    }
+}
+
+
 
 @Serializable
 data class VideoFile(

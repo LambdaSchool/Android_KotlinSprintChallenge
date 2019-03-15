@@ -32,8 +32,7 @@ class MainActivity : AppCompatActivity() {
             )
             if (success) {
                 val videoData = Json.nonstrict.parse(VideoData.serializer(), result)
-                val videoFile = videoData.video_files[videoData.video_files.size - 1]
-                val uri = Uri.parse(videoFile.file_url)
+                val uri = Uri.parse(videoData.getLastVideoUrl())
                 withContext(Dispatchers.Main) {
                     player_video.setVideoURI(uri)
                     player_video.setOnPreparedListener {
