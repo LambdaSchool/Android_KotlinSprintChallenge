@@ -34,8 +34,14 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     player_video.setVideoURI(uri)
                     player_video.setOnPreparedListener {
+                        player_seekbar.max = player_video.duration
                         play_pauseVideo()
                         player_button_play.isEnabled = true
+                        Thread(Runnable {
+                            while (player_video.bufferPercentage < 100) {
+                                runOnUiThread { player_seekbar.secondaryProgress = (player_video.bufferPercentage * player_video.duration) / 100 }
+                            }
+                        }).start()
                     }
                 }
             }
@@ -58,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun play_pauseVideo() {
-        player_seekbar.max = player_video.duration
         val buttonDrawable: Drawable?
         if (player_video.isPlaying) {
             player_video.pause()

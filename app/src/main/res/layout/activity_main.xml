@@ -32,6 +32,7 @@
 
     <SeekBar
         android:id="@+id/player_seekbar"
+        android:secondaryProgressTint="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

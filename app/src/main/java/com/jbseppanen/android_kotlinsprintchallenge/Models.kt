@@ -15,7 +15,7 @@ data class VideoData(
     val youtube_id: String
 ) {
     fun getLastVideoUrl():String {
-      return video_files.last().file_url
+      return video_files.first().file_url
     }
 }
 
