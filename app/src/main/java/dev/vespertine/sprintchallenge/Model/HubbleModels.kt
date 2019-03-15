@@ -1,7 +1,10 @@
 package dev.vespertine.sprintchallenge.Model
 
 import kotlinx.serialization.Optional
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class HubbleNewsPage(
     val name: String? = "",
     val news_id: String? = "",
@@ -9,6 +12,7 @@ data class HubbleNewsPage(
 )
 
 //news_id will be used to pull specific stories.
+@Serializable
 data class HubbleNewsSpecific(
     val name: String? = "",
     val url: String? = "",
