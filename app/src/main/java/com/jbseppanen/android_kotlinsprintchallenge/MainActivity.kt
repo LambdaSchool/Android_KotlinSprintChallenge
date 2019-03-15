@@ -15,9 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val url = "http://hubblesite.org/api/v3/video/1097"
-
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
