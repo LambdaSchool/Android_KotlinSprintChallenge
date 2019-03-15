@@ -24,8 +24,8 @@ data class VideoDetails(
     val video_files: List<VideoFiles>? = listOf<VideoFiles>()
 )
 
-fun VideoDetails.getVideoUrl(): String {
-    return this.video_files?.get(1)?.file_url ?: ""
+fun VideoDetails.getVideoUrl(): VideoFiles? {
+    return this.video_files?.get(1)
 }
 
 @Serializable
