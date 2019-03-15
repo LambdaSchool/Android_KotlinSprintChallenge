@@ -1,6 +1,5 @@
 package com.jbseppanen.android_kotlinsprintchallenge
 
-import android.content.Context
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -15,9 +14,7 @@ import kotlinx.serialization.json.Json
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        const val url =
-//                "https://media.stsci.edu/uploads/video_file/video_attachment/4976/STScI-H-v1845a-640x360.mp4"
-            "http://hubblesite.org/api/v3/video/1097"
+        const val url = "http://hubblesite.org/api/v3/video/1097"
 
     }
 
@@ -25,15 +22,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val context: Context = this
-
+        player_button_play.isEnabled = false
         val dataJob = Job()
         val dataScope = CoroutineScope(Dispatchers.IO + dataJob)
         dataScope.launch {
 
             val (success, result) = NetworkAdapter.httpRequest(
-                url, NetworkAdapter.GET, NetworkAdapter.RESPONSE_STRING, null, null
+                    url, NetworkAdapter.GET, null
             )
             if (success) {
                 val videoData = Json.nonstrict.parse(VideoData.serializer(), result)
@@ -41,8 +36,10 @@ class MainActivity : AppCompatActivity() {
                 val uri = Uri.parse(videoFile.file_url)
                 withContext(Dispatchers.Main) {
                     player_video.setVideoURI(uri)
-
-//                    play_pauseVideo()
+                    player_video.setOnPreparedListener {
+                        play_pauseVideo()
+                        player_button_play.isEnabled = true
+                    }
                 }
             }
         }
@@ -58,19 +55,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
     }
 
     fun play_pauseVideo() {
         player_seekbar.max = player_video.duration
-        val buttonDrawable:Drawable?
+        val buttonDrawable: Drawable?
         if (player_video.isPlaying) {
             player_video.pause()
             buttonDrawable = getDrawable(R.drawable.avd_anim_stop_to_play)
