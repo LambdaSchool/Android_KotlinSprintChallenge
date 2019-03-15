@@ -3,7 +3,7 @@ package com.joshuahalvorson.android_kotlinsprintchallenge.model
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 
-const val VIDEOTOGET = 1
+const val VIDEOTOGET = 3
 
 @Serializable
 data class VideoDetails(
