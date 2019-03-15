@@ -22,4 +22,14 @@ object VideoDao{
         }
         return videoList?: listOf()
     }
+
+    @WorkerThread
+    suspend fun getVideoDetail(id: Int?): VideoDetails{
+        val (success, result) = NetworkAdapter.httpGetRequest(DETAIL_VIDEO_URL + id)
+        var videoDetails: VideoDetails? = null
+        if(success){
+            videoDetails = Json.parse(VideoDetails.serializer(), result)
+        }
+        return videoDetails?: VideoDetails()
+    }
 }
