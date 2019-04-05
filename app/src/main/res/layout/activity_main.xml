@@ -16,7 +16,8 @@
         android:layout_weight="7"
         android:orientation="vertical">
 
-        <ImageView
+        <VideoView
+            android:id="@+id/player_video"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:src="@mipmap/iconfinder_41_itunes_353486"
@@ -27,8 +28,8 @@
         <android.support.v7.widget.AppCompatAutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Song Name"
-            android:id="@+id/songNameTextView"
+            android:text="Video Name"
+            android:id="@+id/videoNameTextView"
             android:textAlignment="center"
             android:textSize="22sp"
             android:layout_marginTop="20dp"
