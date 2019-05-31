@@ -1,7 +1,10 @@
 package com.spencerstock.android_kotlinsprintchallenge
 
 import android.support.annotation.WorkerThread
-import java.io.*
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
@@ -10,15 +13,22 @@ object NetworkAdapter {
     const val GET = "GET"
     const val POST = "POST"
     const val PUT = "PUT"
-    const val TIMEOUT = 5000
     const val DELETE = "DELETE"
+    const val TIMEOUT = 3000
+
 
     @WorkerThread
-    fun httpRequest(stringUrl: String, requestType: String, jsonBody: String?,headerProperties: Map<String, String>? = null): Pair<Boolean, String> {
+    fun httpRequest(
+        stringUrl: String,
+        requestType: String,
+        jsonBody: String?,
+        headerProperties: Map<String, String>? = null
+    ): Pair<Boolean, String> {
         var result = ""
         var success = false
         var stream: InputStream? = null
         var connection: HttpURLConnection? = null
+
         try {
             val url = URL(stringUrl)
             connection = url.openConnection() as HttpURLConnection
@@ -28,7 +38,7 @@ object NetworkAdapter {
             connection.setRequestProperty("Content-Type", "application/json")
 
             if (headerProperties != null) {
-                for((key, value) in headerProperties) {
+                for ((key, value) in headerProperties) {
                     connection.setRequestProperty(key, value)
                 }
             }
@@ -52,9 +62,9 @@ object NetworkAdapter {
                     while (line != null) {
                         builder.append(line)
                         line = reader.readLine()
+                        success = true
                     }
                     result = builder.toString()
-                    success = true
                 }
             }
 
@@ -77,4 +87,6 @@ object NetworkAdapter {
         }
         return success to result
     }
+
+
 }

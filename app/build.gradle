@@ -60,5 +60,5 @@ dependencies {
 }
 
 dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:+'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
