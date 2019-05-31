@@ -27,9 +27,7 @@ object NetworkAdapter {
             //                    connection.setRequestProperty("x-api-key", API_KEY);
             // Timeout for reading InputStream arbitrarily set to 3000ms.
             connection.readTimeout = 3000
-            // Timeout for connection.connect() arbitrarily set to 3000ms.
             connection.connectTimeout = 3000
-            // For this use case, set HTTP method to GET.
             connection.requestMethod = requestType
 
             if (headerProperties != null) {
@@ -38,8 +36,6 @@ object NetworkAdapter {
                 }
             }
 
-            // Already true by default but setting just in case; needs to be true since this request
-            // is carrying an input (response) body.
             connection.doInput = true
 
             if (requestType == "POST" && content != null) {
@@ -47,18 +43,14 @@ object NetworkAdapter {
                 outputStream.write(content.toString().toByteArray())
                 outputStream.close()
             } else {
-                // Open communications link (network traffic occurs here).
                 connection.connect()
             }
-            //            publishProgress(DownloadCallback.Progress.CONNECT_SUCCESS);
             val responseCode = connection.responseCode
             if (responseCode != HttpsURLConnection.HTTP_OK) {
                 result = Integer.toString(responseCode)
                 throw IOException("HTTP error code: $responseCode")
             }
-            // Retrieve the response body as an InputStream.
             stream = connection.inputStream
-            // publishProgress(DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS, 0);
             if (stream != null) {
                 val reader = BufferedReader(InputStreamReader(stream))
                 val builder = StringBuilder()
@@ -68,13 +60,10 @@ object NetworkAdapter {
                     line = reader.readLine()
                 }
                 result = builder.toString()
-//                success = true
             }
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
-
-            // Close Stream and disconnect HTTPS connection.
             if (stream != null) {
                 try {
                     stream.close()
@@ -87,12 +76,6 @@ object NetworkAdapter {
 
         }
 
-        /*try {
-            downloadThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            callback.onRequestFinished(false, result[0]);
-        }*/
 
         return result
     }
@@ -191,7 +174,6 @@ object NetworkAdapter {
 
                 callback.returnResult(success, result)
             }
-            //                return result;
         }).start()
     }
 }
