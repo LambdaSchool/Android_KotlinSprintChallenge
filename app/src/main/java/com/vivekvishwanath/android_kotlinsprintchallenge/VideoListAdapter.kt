@@ -40,6 +40,10 @@ class VideoListAdapter(videoList: List<Video>, context: Context) :
         val itemHolder = holder as ViewHolder
         holder.bindModel(data[position])
         Picasso.get().load(data[position].image).into(itemHolder.videoImage)
-
+        holder.videoItemParent.setOnClickListener{
+            val intent = Intent(context, ViewActivity::class.java)
+            intent.putExtra("video", data[position])
+            context.startActivity(intent)
+        }
     }
 }
