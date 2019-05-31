@@ -9,8 +9,8 @@ data class VideoFile(
     @Optional val id: Int,
     @Optional val image: String,
     @Optional val mission: String,
-    @Optional val name: String,
-    @Optional val news_name: String
+    @Optional val name: String
+   // @Optional val news_name: String
 )
 
 @Serializable

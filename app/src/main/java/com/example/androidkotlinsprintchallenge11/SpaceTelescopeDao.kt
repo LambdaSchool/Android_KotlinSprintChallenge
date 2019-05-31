@@ -28,12 +28,11 @@ object SpaceTelescopeDao {
 
 
     fun getVideoModel(id:Int) {
-
         NetworkAdapter.httpGetRequest(
             "$VIDEO_SINGLE_URL$id",
             object : NetworkAdapter.NetworkCallback {
                 override fun returnResult(success: Boolean?, result: String) {
-                    videoModels = Json.parse(VideoModels.serializer(), result)
+                    videoModels = Json.nonstrict.parse(VideoModels.serializer(), result)
                 }
             })
     }
@@ -43,7 +42,7 @@ object SpaceTelescopeDao {
 
          NetworkAdapter.httpGetRequest("$VIDEO_URL", object : NetworkAdapter.NetworkCallback {
             override fun returnResult(success: Boolean?, result: String) {
-                videoFile = Json.parse(VideoFile.serializer().list, result)[VIDEO_INDEX]
+                videoFile = Json.nonstrict.parse(VideoFile.serializer().list, result)[VIDEO_INDEX]
             }
         })
     }
