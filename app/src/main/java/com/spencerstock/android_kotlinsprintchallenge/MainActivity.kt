@@ -3,6 +3,7 @@ package com.spencerstock.android_kotlinsprintchallenge
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
@@ -61,5 +62,11 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
+
+        button_play.setOnClickListener {
+            if (video_view.isPlaying) {
+                video_view.pause()
+            } else video_view.start()
+        }
     }
 }
