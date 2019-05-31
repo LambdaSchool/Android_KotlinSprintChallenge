@@ -19,6 +19,7 @@ object SpaceTelescopeDao {
         withContext(scheduler.asCoroutineDispatcher()) {
 
             getVideoFile()
+            Thread.sleep(1000)
             getVideoModel(videoFile!!.id)
 
            videoModels!!.html_5_video.video_url

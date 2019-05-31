@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) { vvVideoView.setVideoPath(SpaceTelescopeDao.getVideo(threadPool)) }
         }
 
-        btnPlayPause.setOnClickListener {  }
+
+
+        btnPlayPause.setOnClickListener { vvVideoView.start() }
     }
 
 }
