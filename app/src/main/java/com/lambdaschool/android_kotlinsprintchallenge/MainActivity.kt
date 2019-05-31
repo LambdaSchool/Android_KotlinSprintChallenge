@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.annotation.UiThread
 import android.widget.MediaController
 import android.widget.SeekBar
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
                 videoModel = HubbleVideoDao.retrieveHubbleVideoDataById(videoId)
             }
             withContext(Dispatchers.Main) {
+                Toast.makeText(this@MainActivity,videoModel?.short_description,Toast.LENGTH_LONG).show()
                 val mediaController: MediaController? = MediaController(this@MainActivity)
                 video_view.setVideoPath(videoModel?.getVideoUrl())
                 mediaController?.setAnchorView(video_view)
