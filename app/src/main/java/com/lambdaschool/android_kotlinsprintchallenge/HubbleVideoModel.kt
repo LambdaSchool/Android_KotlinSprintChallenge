@@ -38,6 +38,9 @@ data class VideoList(
 }
 
 @UiThread
-fun VideoModel.getVideoUrl():String {
-    return this.video_files?.get(VideoList.DESIRED_VIDEO_QUALITY)?.file_url ?:""
+fun VideoModel.getVideoUrl(): String {
+    return if (this.video_files?.size!! > 1)
+        this.video_files.get(VideoList.DESIRED_VIDEO_QUALITY).file_url ?: ""
+    else
+        this.video_files.get(0).file_url ?: ""
 }

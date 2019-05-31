@@ -13,17 +13,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        showVideo()
+        button_retrieve.setOnClickListener { showVideo(edit_text_retrieve.text.toString()) }
     }
 
-    fun showVideo() {
+    fun showVideo(videoId:String) {
         var videoModel: VideoModel? = null
         val job = Job()
         val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main + job)
 
         coroutineScope.launch {
             withContext(Dispatchers.IO) {
-                videoModel = HubbleVideoDao.retrieveHubbleVideoDataById("1210")
+                videoModel = HubbleVideoDao.retrieveHubbleVideoDataById(videoId)
             }
             withContext(Dispatchers.Main) {
                 val mediaController: MediaController? = MediaController(this@MainActivity)
