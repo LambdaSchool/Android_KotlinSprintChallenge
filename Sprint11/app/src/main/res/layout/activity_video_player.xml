@@ -35,7 +35,7 @@
                     android:max="100"
                     app:layout_constraintStart_toEndOf="@id/a_video_player_b_play_pause"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>
 

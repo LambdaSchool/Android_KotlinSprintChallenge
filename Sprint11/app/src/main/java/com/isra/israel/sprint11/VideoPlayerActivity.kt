@@ -3,10 +3,9 @@ package com.isra.israel.sprint11
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.SeekBar
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_video_player.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -16,8 +15,7 @@ class VideoPlayerActivity : AppCompatActivity() {
     private val videoFileJob = Job()
     private val videoFileScope = CoroutineScope(Dispatchers.IO + videoFileJob)
 
-    private val currentSeekBarTimer = Timer()
-    private val bufferSeekBarTimer = Timer()
+    private val seekBarUpdateTimer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +40,14 @@ class VideoPlayerActivity : AppCompatActivity() {
         }
 
         a_video_player_b_play_pause.isEnabled = false
+//        a_video_player_sb_buffer.setOnTouchListener(object: View.OnTouchListener {
+//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+//                return true
+//            }
+//        })
+
+        a_video_player_sb_buffer.isEnabled = false
+
         a_video_player_vv.setOnPreparedListener {
             a_video_player_preparing_pb.visibility = View.GONE
             a_video_player_b_play_pause.isEnabled = true
@@ -72,18 +78,10 @@ class VideoPlayerActivity : AppCompatActivity() {
 
             })
 
-            currentSeekBarTimer.scheduleAtFixedRate(object: TimerTask() {
+            seekBarUpdateTimer.scheduleAtFixedRate(object: TimerTask() {
                 override fun run() {
                     runOnUiThread {
                         a_video_player_sb_current.progress = a_video_player_vv.currentPosition
-                    }
-                }
-
-            } ,0, 1000)
-
-            bufferSeekBarTimer.scheduleAtFixedRate(object: TimerTask() {
-                override fun run() {
-                    runOnUiThread {
                         a_video_player_sb_buffer.progress = a_video_player_vv.bufferPercentage
                     }
                 }
@@ -96,7 +94,7 @@ class VideoPlayerActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
-        currentSeekBarTimer.cancel()
-        bufferSeekBarTimer.cancel()
+        seekBarUpdateTimer.cancel()
+        videoFileScope.cancel()
     }
 }
