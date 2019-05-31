@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             }
             withContext(Dispatchers.Main) {
                 val mediaController: MediaController? = MediaController(this@MainActivity)
-                video_view.setVideoPath("https://media.stsci.edu/uploads/video_file/video_attachment/4532/STScI-H-v1737a-640x360.mp4")
+                video_view.setVideoPath(videoModel?.video_files?.get(1)?.file_url)
                 mediaController?.setAnchorView(video_view)
                 video_view.setMediaController(mediaController)
                 video_view.start()

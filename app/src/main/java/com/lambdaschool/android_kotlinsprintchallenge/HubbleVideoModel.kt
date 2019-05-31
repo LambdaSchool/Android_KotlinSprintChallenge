@@ -30,4 +30,12 @@ data class VideoList(
         val height: Int? = -1,
         val frame_rate: String? = "",
         val format: String? = ""
-)
+) {
+    companion object {
+        const val DESIRED_VIDEO_QUALITY: Int = 1
+    }
+}
+
+fun VideoModel.getVideoUrl():String {
+    return this.video_files?.get(VideoList.DESIRED_VIDEO_QUALITY)?.file_url ?:""
+}
