@@ -28,14 +28,10 @@ class MainActivity : AppCompatActivity() {
 
 
         val videoProgressListenerRunnable: Runnable = Runnable {
-            try {
-                Thread.sleep(1000)
-            }catch (e: InterruptedException){
-                e.printStackTrace()
-            }
             while (videoView.isPlaying){
                 runOnUiThread(Runnable {
                     progressSeekBar.progress = videoView.currentPosition
+                    progressSeekBar.secondaryProgress = (videoView.duration / videoView.bufferPercentage)
                 })
                 try {
                     Thread.sleep((videoView.duration / videoView.width).toLong())
@@ -44,6 +40,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        progressSeekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if(fromUser){
+                    videoView.seekTo(progress)
+                }
+            }
+        })
 
         playPauseButton.setOnClickListener {
             if (videoView.isPlaying){
@@ -57,7 +67,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        videoView.setOnPreparedListener { playPauseButton.isEnabled = true }
+        videoView.setOnPreparedListener {
+            playPauseButton.isEnabled = true
+            progressSeekBar.max = videoView.duration
+
+        }
 
 
         dataScope.launch {
@@ -68,8 +82,6 @@ class MainActivity : AppCompatActivity() {
             val videoFile = Json.nonstrict.parse(VideoItem.serializer(), resultString)
 
             videoView.setVideoURI(Uri.parse(videoFile.html_5_video?.video_url))
-            progressSeekBar.max = videoView.duration
-            progressSeekBar.progress = 0
         }
     }
 
