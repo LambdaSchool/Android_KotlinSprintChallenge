@@ -1,5 +1,8 @@
 package com.jakeesveld.sprint11
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class VideoListItem(
     val id: Int?,
     val name: String?,
@@ -8,6 +11,7 @@ data class VideoListItem(
     val collection: String?
 )
 
+@Serializable
 data class VideoItem(
     val name: String?,
     val short_description: String?,
@@ -21,8 +25,10 @@ data class VideoItem(
     val video_files: List<VideoDetails>?
 )
 
+@Serializable
 data class VideoFile(val video_url: String?, val poster_url: String?)
 
+@Serializable
 data class VideoDetails(
     val file_url: String?,
     val file_size: Int?,
