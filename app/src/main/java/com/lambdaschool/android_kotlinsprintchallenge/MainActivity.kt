@@ -2,6 +2,7 @@ package com.lambdaschool.android_kotlinsprintchallenge
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.UiThread
 import android.widget.MediaController
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
@@ -12,6 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        showVideo()
+    }
+
+    fun showVideo() {
         var videoModel: VideoModel? = null
         val job = Job()
         val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main + job)
@@ -22,13 +27,11 @@ class MainActivity : AppCompatActivity() {
             }
             withContext(Dispatchers.Main) {
                 val mediaController: MediaController? = MediaController(this@MainActivity)
-                video_view.setVideoPath(videoModel?.video_files?.get(1)?.file_url)
+                video_view.setVideoPath(videoModel?.getVideoUrl())
                 mediaController?.setAnchorView(video_view)
                 video_view.setMediaController(mediaController)
                 video_view.start()
             }
         }
-
-
     }
 }

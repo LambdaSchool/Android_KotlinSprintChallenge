@@ -1,5 +1,6 @@
 package com.lambdaschool.android_kotlinsprintchallenge
 
+import android.support.annotation.UiThread
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -36,6 +37,7 @@ data class VideoList(
     }
 }
 
+@UiThread
 fun VideoModel.getVideoUrl():String {
     return this.video_files?.get(VideoList.DESIRED_VIDEO_QUALITY)?.file_url ?:""
 }
