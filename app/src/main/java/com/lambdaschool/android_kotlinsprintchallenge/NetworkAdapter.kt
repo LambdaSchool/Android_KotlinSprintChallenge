@@ -14,7 +14,7 @@ import java.net.URL
 object NetworkAdapter {
 
     @WorkerThread
-    fun httpGetRequest(urlString: String): String {
+    fun httpGetRequest(urlString: String): Pair<Boolean, String> {
         var result = ""
         var success = false
         var connection: HttpURLConnection? = null
@@ -57,7 +57,7 @@ object NetworkAdapter {
 
             }
 
-            return result
+            return Pair(success, result)
         }
     }
 
@@ -66,6 +66,7 @@ object NetworkAdapter {
         var result: Bitmap? = null
         var success = false
         var connection: HttpURLConnection? = null
+
         try {
 
             val url = URL(urlString)
@@ -82,6 +83,6 @@ object NetworkAdapter {
             connection?.disconnect()
         }
 
-        return Triple(true, result, urlString)
+        return Triple(success, result, urlString)
     }
 }
