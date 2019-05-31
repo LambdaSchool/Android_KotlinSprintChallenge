@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8sp"
     android:orientation="vertical"
     android:padding="8sp"
-    android:layout_margin="8sp"
     tools:context=".MainActivity">
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Retrieve" />
-    
+
     <Space
         android:layout_width="wrap_content"
         android:layout_height="100sp" />
@@ -43,9 +43,16 @@
 
     <SeekBar
         android:id="@+id/seek_bar"
-        android:secondaryProgressTint="#000000"
-        android:secondaryProgressTintMode="src_over"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:secondaryProgressTint="#000000"
+        android:secondaryProgressTintMode="src_over" />
+
+    <ImageButton
+        android:id="@+id/image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
 </LinearLayout>
