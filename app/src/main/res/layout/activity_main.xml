@@ -43,6 +43,8 @@
 
     <SeekBar
         android:id="@+id/seek_bar"
+        android:secondaryProgressTint="#000000"
+        android:secondaryProgressTintMode="src_over"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
