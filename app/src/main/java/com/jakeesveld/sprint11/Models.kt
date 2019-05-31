@@ -23,7 +23,12 @@ data class VideoItem(
     val image_retina: String?,
     val html_5_video: VideoFile?,
     val video_files: List<VideoDetails>?
-)
+){
+    companion object{
+        const val VIDEO_URL = "http://hubblesite.org/api/v3/video/1205"
+    }
+}
+
 
 @Serializable
 data class VideoFile(val video_url: String?, val poster_url: String?)
