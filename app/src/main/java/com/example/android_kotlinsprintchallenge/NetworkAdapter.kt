@@ -6,7 +6,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
-import java.net.MalformedURLException
 import java.net.URL
 
 object NetworkAdapter {
@@ -68,7 +67,7 @@ object NetworkAdapter {
                 }
             }
 
-        } catch (e: MalformedURLException) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             result = e.message.toString()
         } catch (e: IOException) {
