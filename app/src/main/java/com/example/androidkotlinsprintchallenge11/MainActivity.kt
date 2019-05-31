@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
@@ -17,11 +16,11 @@ class MainActivity : AppCompatActivity() {
     private val threadPool = ThreadPoolExecutor(3, 3, 5L, TimeUnit.SECONDS, LinkedBlockingQueue())
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val btnLoad = findViewById<Button>(R.id.btn_load_video)
+        val seekBar = findViewById<SeekBar>(R.id.seekbar)
         val btnPlayPause = findViewById<Button>(R.id.btn_play_pause)
         val tvTitle = findViewById<TextView>(R.id.tv_title)
         val vvVideoView = findViewById<VideoView>(R.id.vv_video_view)
@@ -30,12 +29,17 @@ class MainActivity : AppCompatActivity() {
         vvVideoView.setMediaController(mediaController)
 
         btnLoad.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) { vvVideoView.setVideoPath(SpaceTelescopeDao.getVideo(threadPool)) }
+            GlobalScope.launch(Dispatchers.Main, CoroutineStart.DEFAULT) { vvVideoView.setVideoPath(SpaceTelescopeDao.getVideo()) }
         }
 
 
 
-        btnPlayPause.setOnClickListener { vvVideoView.start() }
+        btnPlayPause.setOnClickListener {
+            when(vvVideoView.isPlaying){
+                true -> vvVideoView.stopPlayback()
+                false -> vvVideoView.start()
+            }
+        }
     }
 
 }
