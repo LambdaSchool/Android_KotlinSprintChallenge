@@ -1,3 +1,5 @@
+Spencer Stock
+
 # Kotlin Sprint Challenge
 
 ## Objectives
