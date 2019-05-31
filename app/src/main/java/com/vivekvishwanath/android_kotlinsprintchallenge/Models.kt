@@ -14,7 +14,11 @@ data class Video(val name: String?, val short_description: String?,
                  val mission: String?, val collection: String?,
                  val image: String?, val image_retina: String?,
                  @Optional val html_5_video: Html5Video? = null,
-                 @Optional val video_files: List<VideoFile>? = null): java.io.Serializable
+                 @Optional val video_files: List<VideoFile>? = null): java.io.Serializable {
+    fun getSmallestVideo(): String? {
+        return video_files?.last()?.file_url
+    }
+}
 
 @Serializable
 data class Html5Video(val video_url: String?, val poster_url: String?): java.io.Serializable
