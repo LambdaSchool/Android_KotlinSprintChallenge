@@ -12,9 +12,9 @@ class SpaceTelescopeApiDao {
         const val VIDEO = "video/"
 
         @WorkerThread
-        fun getVideos(page: Int?) : MutableList<VideoResult> {
+        fun getVideos(page: Int?) : List<VideoResult> {
 
-            var out: MutableList<VideoResult> = ArrayList<VideoResult>()
+            var out: List<VideoResult> = listOf()
             buildString {
                 append(BASE_URL)
                 append(VIDEOS)
@@ -24,8 +24,7 @@ class SpaceTelescopeApiDao {
 
                 NetworkAdapter.httpRequest(toString(), NetworkAdapter.GET, null, null) { code, body ->
                     if (NetworkAdapter.isSuccessful(code) && body != null) {
-                        //out = Json.nonstrict.parse(VideoResult.serializer().list(), body)
-                        out = ArrayList<VideoResult>()
+                        out = Json.nonstrict.parse(VideoResult.serializer().list, body)
                     }
                 }
             }
@@ -50,6 +49,19 @@ class SpaceTelescopeApiDao {
             }
 
             return video
+        }
+
+        @WorkerThread
+        fun getVideoFile(videoUrl: String) : String? {
+
+            var out: String? = null
+            NetworkAdapter.httpsRequest(videoUrl, NetworkAdapter.GET, null, null) { code, body ->
+                if (NetworkAdapter.isSuccessful(code) && body != null) {
+                    out = body
+                }
+            }
+
+            return out
         }
 
     }

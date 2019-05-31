@@ -8,4 +8,4 @@ class Video(
     var name: String?,
     @SerialName("youtube_id") var youtubeId: String?,
     @SerialName("video_files") var videoFiles: MutableList<VideoFile>?
-) : java.io.Serializable
+)

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_video_result.view.*
 import kotlinx.coroutines.*
 
 class VideoResultListAdapter : RecyclerView.Adapter<VideoResultListAdapter.ViewHolder>() {
-    private var videoResultList: MutableList<VideoResult> = ArrayList()
+    private var videoResultList: List<VideoResult> = ArrayList()
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.item_video_result, p0, false))
@@ -23,7 +23,7 @@ class VideoResultListAdapter : RecyclerView.Adapter<VideoResultListAdapter.ViewH
         p0.bindVideoResult(videoResultList[p1])
     }
 
-    fun setVideoList(videoResultList: MutableList<VideoResult>) {
+    fun setVideoList(videoResultList: List<VideoResult>) {
         this.videoResultList = videoResultList
         notifyDataSetChanged()
     }
@@ -39,11 +39,9 @@ class VideoResultListAdapter : RecyclerView.Adapter<VideoResultListAdapter.ViewH
                 val videoId = videoResult.id ?: return@setOnClickListener
                 videoScope.launch {
                     if (videoResult.id != null) {
-                        val video = SpaceTelescopeApiDao.getVideo(videoId) ?: return@launch
-
                         withContext(Dispatchers.Main) {
                             val intent = Intent(itemView.context, VideoPlayerActivity::class.java)
-                            intent.putExtra("video", video)
+                            intent.putExtra("video_id", videoId)
                             itemView.context.startActivity(intent)
                         }
                     }
