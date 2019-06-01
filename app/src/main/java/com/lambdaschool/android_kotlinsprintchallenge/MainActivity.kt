@@ -1,14 +1,12 @@
 package com.lambdaschool.android_kotlinsprintchallenge
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.UiThread
-import android.widget.MediaController
+import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import android.widget.SeekBar
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-import java.lang.Runnable
 
 class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
 
@@ -24,37 +22,32 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
             if (video_view.isPlaying) {
                 video_view.pause()
                 image_button.setImageResource(android.R.drawable.ic_media_play)
-            }
-            else {
-                image_button.setImageResource(android.R.drawable.ic_media_pause)
+                seekbarUpdateHandler.removeCallbacks(updateSeekbar);
+            } else {
                 video_view.start()
+                image_button.setImageResource(android.R.drawable.ic_media_pause)
+                seekbarUpdateHandler.postDelayed(updateSeekbar, 0);
             }
         }
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        video_view.seekTo(progress)
+        if (fromUser)
+            video_view.seekTo(progress)
         seekBar?.secondaryProgress = video_view.bufferPercentage / 100 * video_view.duration
     }
 
-    override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
-    }
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
         seekBar?.progress?.let { this.video_view.seekTo(it) }
-        Thread(videoProgressListenerRunnable).start()
     }
 
-    private val videoProgressListenerRunnable = Runnable {
-        while (video_view.isPlaying) {
-            val currentPosition = video_view.currentPosition
-            runOnUiThread { seek_bar.progress = currentPosition }
-            try {
-                Thread.sleep((video_view.duration / video_view.width).toLong())
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
+    private val seekbarUpdateHandler = Handler()
+    private val updateSeekbar = object : Runnable {
+        override fun run() {
+            seek_bar.setProgress(video_view.currentPosition)
+            seekbarUpdateHandler.postDelayed(this, 50)
         }
     }
 
@@ -71,6 +64,8 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
             withContext(Dispatchers.Main) {
                 Toast.makeText(this@MainActivity, videoModel?.short_description, Toast.LENGTH_LONG).show()
                 //val mediaController: MediaController? = MediaController(this@MainActivity)
+                image_button.setImageResource(android.R.drawable.ic_media_play)
+                video_view.stopPlayback()
                 video_view.setVideoPath(videoModel?.getVideoUrl())
                 //mediaController?.setAnchorView(video_view)
                 //video_view.setMediaController(mediaController)
