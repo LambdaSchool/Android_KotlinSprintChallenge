@@ -67,7 +67,7 @@ object NetworkAdapter {
     @WorkerThread
     suspend fun httpGetRequestCoroutine(urlString: String): String {
         var result = ""
-        var success = false
+        //var success = false
         var connection: HttpURLConnection? = null
         var stream: InputStream? = null
         try {
@@ -87,7 +87,7 @@ object NetworkAdapter {
                         line = reader.readLine()
                     }
                     result = builder.toString()
-                    success = true
+            //        success = true
                 }
             } else {
                 result = responseCode.toString()
