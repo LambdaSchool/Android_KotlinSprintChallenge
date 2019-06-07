@@ -21,6 +21,8 @@ class MovieFragment : Fragment() {
     private var mediacontroller: MediaController? = null
     private var uri: Uri? = null
     private var progressBar: ProgressBar? = null
+    val URLPATH="URLPATH"
+
     companion object {
         fun newInstance() = MovieFragment()
     }
@@ -47,8 +49,12 @@ class MovieFragment : Fragment() {
 
         mediacontroller = MediaController(this.activity)
         mediacontroller!!.setAnchorView(vv)
-        val uriPath = "https://media.stsci.edu/uploads/video_file/video_attachment/3837/STScI-H-v0526a-640x480.mp4" //update package name
+
+        val uriPath =this.arguments!!.get(URLPATH)as String
+
         uri = Uri.parse(uriPath)
+
+
 
         vv!!.setOnCompletionListener {
             vv!!.start()

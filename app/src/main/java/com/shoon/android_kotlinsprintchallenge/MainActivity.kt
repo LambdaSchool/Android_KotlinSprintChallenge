@@ -8,9 +8,16 @@ import com.shoon.android_kotlinsprintchallenge.dummy.DummyContent
 
 class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractionListener {
     override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+
+
+        val args = Bundle()
+        val strURL= "https://media.stsci.edu/uploads/video_file/video_attachment/3837/STScI-H-v0526a-640x480.mp4"
+        val movieFragment =MovieFragment()
+        args.putString(movieFragment.URLPATH, strURL)
+        movieFragment.arguments=args
         manager = supportFragmentManager
         transaction = manager.beginTransaction()
-        transaction.replace(R.id.frameMain, MovieFragment())
+        transaction.replace(R.id.frameMain, movieFragment)
         transaction.addToBackStack(null)
         transaction.commit()
 
