@@ -35,24 +35,8 @@
                 android:text="Open" android:visibility="visible" android:layout_above="@+id/vv"
                 android:layout_marginBottom="-124dp"/>
 
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnonce"
-                android:text="Once"
-                android:layout_alignBaseline="@+id/btnOpen"
-                android:layout_toEndOf="@+id/btnOpen"
-        />
 
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnplay"
-                android:layout_alignBaseline="@+id/btnOpen"
-                android:text="play"
-                android:layout_toEndOf="@+id/btnonce"
-                android:layout_marginStart="52dp"/>
+
 
     </RelativeLayout>
 

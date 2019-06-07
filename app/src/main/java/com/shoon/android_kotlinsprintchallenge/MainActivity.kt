@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.shoon.android_kotlinsprintchallenge.dummy.DummyContent
 
 class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractionListener {
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+    override fun onListFragmentInteraction(item: MovieListContent.MovieItem?) {
 
 
         val args = Bundle()
