@@ -8,7 +8,11 @@ import com.shoon.android_kotlinsprintchallenge.dummy.DummyContent
 
 class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractionListener {
     override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
-
+        manager = supportFragmentManager
+        transaction = manager.beginTransaction()
+        transaction.replace(R.id.frameMain, MovieFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
 
     }
 
