@@ -28,33 +28,15 @@ data class VideosList(
 
 
 @Serializable
-data class VideoURL(
+data class VideoURL @JvmOverloads constructor(
     val name: String?,
-    /*
-      val short_description: String?,
-      val youtube_id: String?,
-      val credits: String?,
-      val news_name: String?,
-      val mission: String?,
-      val collection: String?,
-      val image: String?,
-      val image_retina: String?,
-      val html_5_video: Html_5_video?,*/
-    val video_files: List<Video_Files>?
+    val video_files: List<Video_Files>?=null
 )
 
-@Serializable
-data class Html_5_video(
-    val video_url: String?,
-    val poster_url: String?
-)
+
 
 @Serializable
 data class Video_Files(
-    val file_url: String?,
-    val file_size: Int?,
-    val width: Int?,
-    val height: Int?,
-    val frame_rate: String?,
-    val format: String?
+    val file_url: String?
+
 )
