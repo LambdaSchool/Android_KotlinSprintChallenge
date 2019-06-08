@@ -30,16 +30,16 @@ data class VideosList(
 @Serializable
 data class VideoURL(
     val name: String?,
-
-    val short_description: String?,
-    val youtube_id: String?,
-    val credits: String?,
-    val news_name: String?,
-    val mission: String?,
-    val collection: String?,
-    val image: String?,
-    val image_retina: String?,
-    val html_5_video: Html_5_video?,
+    /*
+      val short_description: String?,
+      val youtube_id: String?,
+      val credits: String?,
+      val news_name: String?,
+      val mission: String?,
+      val collection: String?,
+      val image: String?,
+      val image_retina: String?,
+      val html_5_video: Html_5_video?,*/
     val video_files: List<Video_Files>?
 )
 
