@@ -35,19 +35,20 @@ object MovieListContent {
         var json= JSONArray(jsnData)
 
         // Add some sample items.
-        for (i in 0..1) {
+        for (i in 0..json.length()-1) {
 
-           var jsono:JSONObject = json[0] as JSONObject
+           var jsono:JSONObject = json[i] as JSONObject
 
             addItem(
                 MovieItem(
                     jsono["id"].toString(),
-                    jsono["name"].toString(),
-                    jsono["news_name"].toString()
+                    jsono["name"].toString()
+
                 )
 
 
             )
+
         }
     }
 
@@ -70,7 +71,7 @@ object MovieListContent {
     /**
      * A dummy item representing a piece of content.
      */
-    data class MovieItem(val id: String, val content: String, val details: String) {
+    data class MovieItem(val id: String, val content: String) {
         override fun toString(): String = content
     }
 
