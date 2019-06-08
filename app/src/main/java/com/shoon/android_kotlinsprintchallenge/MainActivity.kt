@@ -30,18 +30,7 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
                 }
             }
 
-        }/*
-        val args = Bundle()
-        val movieFragment =MovieFragment()
-        args.putString(movieFragment.URLPATH, strURL)
-        movieFragment.arguments=args
-        manager = supportFragmentManager
-        transaction = manager.beginTransaction()
-        transaction.replace(R.id.frameMain, movieFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-*/
-
+        }
     }
 
     private lateinit var manager: FragmentManager

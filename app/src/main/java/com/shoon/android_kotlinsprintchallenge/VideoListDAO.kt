@@ -1,6 +1,7 @@
 package com.shoon.android_kotlinsprintchallenge
 
 import androidx.annotation.WorkerThread
+import kotlinx.serialization.json.Json
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -45,18 +46,12 @@ object VideoListDAO{
     @WorkerThread
     suspend fun getVideoURL(id: String): String? {
         val result = NetworkAdapter.httpGetRequestCoroutine("$SPACETELESCOPE_URL$VIDEO_URL$id")
-    //    val videoList = Json.parse(VideoURL.serializer(), jsnDataVideoUrl) as VideoURL
+      //  val json = Json.parse(VideoURL.serializer(), result) as JSONObject
 
         var json=JSONObject(result)
         var jsna=json["video_files"] as JSONArray
         var js2=jsna[0] as JSONObject
         return js2["file_url"] as String
-        /*return if (result.first && result.second != null){
-
-            result.second
-        } else {
-            null
-        }*/
     }
 
 }

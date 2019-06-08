@@ -57,7 +57,7 @@ object MovieListContent {
             var jsono:JSONObject = json[i] as JSONObject
             //  var videoList= Json.parse(VideosList.serializer(),jsono.toString()) as VideosList
 
-            var videoList=VideosList(jsono["id"] as Number?,jsono["name"]?.toString(),jsono["image"]?.toString())
+            var videoList=VideosList(jsono["id"] as Int?,jsono["name"]?.toString(),jsono["image"]?.toString())
             data.add(videoList)
 
             addItem(

@@ -20,7 +20,7 @@ data class VideoListList(
 
 @Serializable
 data class VideosList(
-    val id: Number?,
+    val id: Int?,
     val name: String?,
     val image: String?
 )
@@ -30,6 +30,7 @@ data class VideosList(
 @Serializable
 data class VideoURL(
     val name: String?,
+
     val short_description: String?,
     val youtube_id: String?,
     val credits: String?,
@@ -51,9 +52,9 @@ data class Html_5_video(
 @Serializable
 data class Video_Files(
     val file_url: String?,
-    val file_size: Number?,
-    val width: Number?,
-    val height: Number?,
+    val file_size: Int?,
+    val width: Int?,
+    val height: Int?,
     val frame_rate: String?,
     val format: String?
 )
