@@ -1,6 +1,6 @@
 package com.shoon.android_kotlinsprintchallenge
 
-import kotlinx.serialization.json.JSON
+
 import kotlinx.serialization.json.JsonPrimitive
 import org.json.JSONArray
 import org.json.JSONObject
@@ -43,12 +43,8 @@ object MovieListContent {
                 MovieItem(
                     jsono["id"].toString(),
                     jsono["name"].toString()
-
                 )
-
-
             )
-
         }
     }
 
