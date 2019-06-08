@@ -1,6 +1,8 @@
 package com.shoon.android_kotlinsprintchallenge
 
 import android.graphics.Bitmap
+import android.os.Parcel
+import android.os.Parcelable
 import kotlinx.serialization.Serializable
 import java.util.*
 
@@ -20,12 +22,9 @@ data class VideoListList(
 data class VideosList(
     val id: Number?,
     val name: String?,
-    val news_name: String?,
-    val image: String?,
-    val collection: String?,
-    val mission: String?,
-    val imageBitmap:Bitmap
+    val image: String?
 )
+
 
 
 @Serializable
