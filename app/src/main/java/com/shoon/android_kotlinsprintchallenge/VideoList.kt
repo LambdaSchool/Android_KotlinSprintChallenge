@@ -29,7 +29,7 @@ data class VideosList(
 
 
 @Serializable
-data class Video(
+data class VideoURL(
     val name: String?,
     val short_description: String?,
     val youtube_id: String?,
