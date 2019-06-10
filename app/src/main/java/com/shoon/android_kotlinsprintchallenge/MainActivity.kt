@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.shoon.android_kotlinsprintchallenge.VideoListDAO.getVideoURL
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractionListener {
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
             withContext(Dispatchers.IO){
                 if (item != null) {
 
-                    strURL= VideoListDAO.getVideoURL(item.id).toString()
+                    strURL= getVideoURL(item.id)
                     val args = Bundle()
                     val movieFragment =MovieFragment()
                     args.putString(movieFragment.URLPATH, strURL)
@@ -31,6 +32,10 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
             }
 
         }
+    }
+
+    suspend fun getVideURL(id:Int):String{
+        return VideoListDAO.getVideoURL(id.toString()).toString()
     }
 
     private lateinit var manager: FragmentManager
