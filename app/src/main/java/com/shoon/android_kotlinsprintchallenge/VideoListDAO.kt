@@ -44,12 +44,12 @@ object VideoListDAO{
     }
 */
     @WorkerThread
-    suspend fun getVideoURL(id: String): String {
+    suspend fun getVideoURL(id: String):    List<Video_Files> {
         val result = NetworkAdapter.httpGetRequestCoroutine("$SPACETELESCOPE_URL$VIDEO_URL$id")
 
         var vurl  = Json.nonstrict.parse(VideoURL.serializer(), result) //as JSONObject
-        return vurl.video_files?.get(0)?.file_url as String
+        return vurl.video_files as List<Video_Files>
 
-    }
+}
 
 }

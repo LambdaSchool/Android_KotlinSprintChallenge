@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
             withContext(Dispatchers.IO){
                 if (item != null) {
 
-                    strURL= getVideoURL(item.id)
+                    strURL= getVideoURL(item.id).get(0).file_url.toString()
+
                     val args = Bundle()
                     val movieFragment =MovieFragment()
                     args.putString(movieFragment.URLPATH, strURL)
@@ -34,8 +35,11 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
         }
     }
 
-    suspend fun getVideURL(id:Int):String{
-        return VideoListDAO.getVideoURL(id.toString()).toString()
+    suspend fun getVideURL(id:Int):List<Video_Files>{
+
+        var vurl=VideoListDAO.getVideoURL(id.toString())
+        return vurl
+
     }
 
     private lateinit var manager: FragmentManager
