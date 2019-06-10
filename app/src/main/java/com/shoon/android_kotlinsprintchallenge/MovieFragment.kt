@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-
+import java.util.*
 
 
 class MovieFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
@@ -69,41 +69,14 @@ class MovieFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         }
 
 
+
         seekbar=this.view!!.findViewById(R.id.seekbar)
         seekbar?.setOnSeekBarChangeListener(this)
 
         vv!!.setVideoURI(uri)
         vv!!.requestFocus()
         vv!!.start()
-        vv.setOnPreparedListener {it->
-            while (vv.isPlaying){
-                this.activity?.runOnUiThread(Runnable {
-                    seekbar.progress=vv.currentPosition
-                    seekbar.secondaryProgress=vv.duration/vv.bufferPercentage
-                })
 
-                try {
-                    Thread.sleep((vv.duration / vv.width).toLong())
-                }catch (e: InterruptedException){
-                    e.printStackTrace()
-                }
-            }
-        }
-
-        val videoProgressListenerRunnable: Runnable = Runnable {
-            while (vv.isPlaying){
-                this.activity?.runOnUiThread(Runnable {
-                    seekbar.progress=vv.currentPosition
-                    seekbar.secondaryProgress=vv.duration/vv.bufferPercentage
-                })
-
-                try {
-                    Thread.sleep((vv.duration / vv.width).toLong())
-                }catch (e: InterruptedException){
-                    e.printStackTrace()
-                }
-            }
-        }
 
 
 
@@ -113,6 +86,21 @@ class MovieFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             vv!!.start()
         }
 
+        val timer = Timer()
+        val monitor = object : TimerTask() {
+            override fun run() {
+                while(vv.isPlaying){
+                    seekbar.setProgress(100*vv.currentPosition/vv.duration)
+                    seekbar.secondaryProgress=vv.duration*vv.bufferPercentage
+                 //   textDebug.setText(seekbar.secondaryProgress.toString()+","+vv.bufferPercentage.toString())
+                    seekbar.invalidate()
+
+                }
+            }
+
+
+        }
+        timer.schedule(monitor, 10, 100)
 
         btnOpen!!.setOnClickListener {
             manager = this.activity!!.supportFragmentManager
@@ -127,6 +115,8 @@ class MovieFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
 
     }
+
+
 
     private val updateSeekbar = object : Runnable {
         override fun run() {
