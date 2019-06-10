@@ -129,11 +129,11 @@ class MovieFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         if (fromUser){
 
             vv.seekTo(vv.duration*progress/100)
-            textDebug.setText(progress.toString()+","+vv.duration.toString()+","+vv.currentPosition.toString())
+        //    textDebug.setText(progress.toString()+","+vv.duration.toString()+","+vv.currentPosition.toString())
         }
 
-        seekBar!!.secondaryProgress = this.vv.duration*vv.bufferPercentage / 100
-        textDebug.append("\n"+seekbar.secondaryProgress.toString()+","+vv.bufferPercentage.toString())
+        seekBar!!.secondaryProgress = this.vv.duration*vv.bufferPercentage
+   //     textDebug.append("\n"+seekbar.secondaryProgress.toString()+","+vv.bufferPercentage.toString())
 
     }
 
