@@ -61,5 +61,6 @@ Build an app which uses the spacetelescope api to retrieve videos and then build
       1. Follows progress of the video
       2. Secondary progress tracks the buffer progress
       3. User can tap and drag to seek to different locations
+      4. Random change
 
 > You can use the `kotlin-android-extensions` plugin that comes with your kotlin app to use the view ids as objects
