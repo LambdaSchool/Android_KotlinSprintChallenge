@@ -36,6 +36,18 @@
                 android:layout_marginBottom="-124dp"/>
 
 
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnplay"
+                android:layout_alignBaseline="@+id/btnOpen"
+                android:text="PAUSE"
+                android:layout_toEndOf="@+id/btnOpen"
+                android:layout_marginStart="52dp"/>
+        <SeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
 
     </RelativeLayout>

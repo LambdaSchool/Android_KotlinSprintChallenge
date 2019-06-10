@@ -7,12 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.MediaController
-import android.widget.ProgressBar
-import android.widget.VideoView
+import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import kotlinx.android.synthetic.*
 
 
 class MovieFragment : Fragment() {
@@ -23,6 +21,8 @@ class MovieFragment : Fragment() {
     private var mediacontroller: MediaController? = null
     private var uri: Uri? = null
     private var progressBar: ProgressBar? = null
+    private var seekbar:SeekBar?=null
+
     val URLPATH="URLPATH"
     private lateinit var manager: FragmentManager
     private lateinit var transaction: FragmentTransaction
@@ -57,6 +57,37 @@ class MovieFragment : Fragment() {
         val uriPath =this.arguments!!.get(URLPATH)as String
 
         uri = Uri.parse(uriPath)
+
+        btnplay = this.view!!.findViewById(R.id.btnplay) as Button
+        btnplay!!.setOnClickListener {
+            if(btnplay!!.text=="PLAY"){
+                vv!!.start()
+                btnplay!!.setText("PAUSE")
+            }else{
+                btnplay!!.setText("PLAY")
+                vv!!.pause()
+
+            }
+
+        }
+        seekbar=this.view!!.findViewById(R.id.seekbar)
+        seekbar?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                var i= vv!!.currentPosition
+
+                // Write code to perform some action when progress is changed.
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // Write code to perform some action when touch is started.
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // Write code to perform some action when touch is stopped.
+             }
+        })
+
+
 
         progressBar!!.visibility = View.VISIBLE
         vv!!.setMediaController(mediacontroller)

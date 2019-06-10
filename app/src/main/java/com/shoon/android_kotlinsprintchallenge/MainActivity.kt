@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
     private lateinit var manager: FragmentManager
     private lateinit var transaction: FragmentTransaction
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
