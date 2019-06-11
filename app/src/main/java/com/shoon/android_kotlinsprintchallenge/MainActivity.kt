@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
         workerScope.launch {
             withContext(Dispatchers.IO){
                 if (item != null) {
-
-                    strURL= getVideoURL(item.id).get(0).file_url.toString()
+                    var vurl=VideoListDAO.getVideoURL(item.id.toString())
+                    strURL= vurl.getAFile()
 
                     val args = Bundle()
                     val movieFragment =MovieFragment()
@@ -35,12 +35,10 @@ class MainActivity : AppCompatActivity() , ItemFragment.OnListFragmentInteractio
         }
     }
 
-    suspend fun getVideURL(id:Int):List<Video_Files>{
+    fun VideoURL.getAFile():String = this.video_files?.get(0)?.file_url.toString()
 
-        var vurl=VideoListDAO.getVideoURL(id.toString())
-        return vurl
 
-    }
+
 
     private lateinit var manager: FragmentManager
     private lateinit var transaction: FragmentTransaction
