@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MovieFragment">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <VideoView
+                android:layout_width="wrap_content"
+                android:layout_height="561dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/vv" android:layout_marginTop="92dp" android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp" android:layout_marginBottom="78dp" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"/>
+        <ProgressBar
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/progrss"
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnOpen"
+                android:text="Open" android:visibility="visible" android:layout_above="@+id/vv"
+                android:layout_marginBottom="-124dp"/>
+
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnplay"
+                android:layout_alignBaseline="@+id/btnOpen"
+                android:text="PAUSE"
+                android:layout_toEndOf="@+id/btnOpen"
+                android:layout_marginStart="52dp"/>
+        <SeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <TextView
+                android:id="@+id/text_debug"
+                android:layout_below="@+id/seekbar"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
